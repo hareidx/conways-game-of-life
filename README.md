@@ -1,0 +1,14 @@
+# Life Lab
+
+A deliberately small, dependency-free Conway's Game of Life browser app. The simulation is isolated in `src/life.js`; the canvas and controls live in `src/app.js`.
+
+## Run it
+
+```sh
+npm test
+npm start
+```
+
+Then open <http://localhost:4173>.
+
+Click or drag to draw cells. Use Space + drag to pan and the mouse wheel to zoom.

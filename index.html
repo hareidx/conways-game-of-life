@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A tiny, inspectable Conway's Game of Life laboratory." />
+    <title>Life Lab — Conway's Game of Life</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">CELLULAR AUTOMATA / B3·S23</p>
+          <h1>Life <em>Lab</em></h1>
+          <p class="intro">A tiny universe with two rules. Draw a pattern, set time in motion, and watch complexity appear.</p>
+        </div>
+        <div class="status" aria-live="polite">
+          <span>GENERATION</span><strong id="generation">0000</strong>
+          <span>POPULATION</span><strong id="population">000</strong>
+        </div>
+      </header>
+
+      <section class="workspace" aria-label="Game of Life simulation">
+        <div class="canvas-wrap">
+          <canvas id="grid" aria-label="Interactive cellular grid. Click or drag to toggle cells."></canvas>
+          <p class="hint">CLICK OR DRAG TO DRAW · SCROLL TO ZOOM · DRAG WITH SPACE TO PAN</p>
+        </div>
+
+        <aside>
+          <div class="control-group transport">
+            <button id="play" class="primary">▶ <span>Start</span></button>
+            <button id="step">Step →</button>
+          </div>
+
+          <div class="control-group">
+            <label for="speed"><span>Tempo</span><output id="speed-label">8 gen/s</output></label>
+            <input id="speed" type="range" min="1" max="30" value="8" />
+          </div>
+
+          <div class="control-group">
+            <span class="label">Specimens</span>
+            <div class="patterns">
+              <button data-pattern="glider">Glider <small>5 cells</small></button>
+              <button data-pattern="blinker">Blinker <small>3 cells</small></button>
+              <button data-pattern="block">Block <small>4 · still</small></button>
+              <button data-pattern="toad">Toad <small>6 · period 2</small></button>
+              <button data-pattern="beacon">Beacon <small>8 · period 2</small></button>
+              <button data-pattern="rPentomino">R-pentomino <small>5 · chaos</small></button>
+              <button data-pattern="acorn">Acorn <small>7 · long life</small></button>
+              <button data-pattern="pulsar">Pulsar <small>48 cells</small></button>
+            </div>
+          </div>
+
+          <div class="control-group utility">
+            <button id="randomize">Randomize</button>
+            <button id="clear">Clear</button>
+          </div>
+
+          <div class="rules">
+            <span class="label">The whole universe</span>
+            <p><b>B3</b> A dead cell with exactly 3 neighbours is born.</p>
+            <p><b>S23</b> A live cell with 2 or 3 neighbours survives.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>

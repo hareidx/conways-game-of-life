@@ -24,13 +24,17 @@ button.primary:hover { background: #d2ff7e; color: #11150f; }
 label { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 11px; text-transform: uppercase; letter-spacing: .09em; }
 output { color: var(--green); }
 input[type="range"] { width: 100%; accent-color: var(--green); }
+select { width: 100%; border: 1px solid #3b403c; border-radius: 0; background: #111411; color: var(--ink); padding: 11px; font: inherit; font-size: 12px; }
 .patterns { display: grid; gap: 7px; margin-top: 14px; }
 .patterns button { display: flex; justify-content: space-between; text-align: left; }
 small { color: var(--muted); }
 .utility { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.rules { border-bottom: 0; }
-.rules p { color: #9ca19d; font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.5; }
-.rules b { color: var(--green); font-family: ui-monospace, monospace; }
+.explainer { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-top: 0; background: #131614; }
+.explainer article { min-height: 170px; padding: 24px; }
+.explainer article + article { border-left: 1px solid var(--line); }
+.explainer h2 { margin: 10px 0 8px; font-family: Georgia, serif; font-size: 27px; font-weight: 400; }
+.explainer p { max-width: 58ch; margin: 0; color: #aeb2ad; font-family: system-ui, sans-serif; font-size: 13px; line-height: 1.55; }
+.explainer .notation { margin-top: 12px; color: var(--green); font-family: ui-monospace, monospace; font-size: 11px; }
 @media (max-width: 760px) {
   main { width: min(100% - 20px, 600px); padding: 24px 0; }
   header { align-items: start; }
@@ -38,6 +42,7 @@ small { color: var(--muted); }
   .workspace { grid-template-columns: 1fr; }
   .canvas-wrap { min-height: 58vh; }
   aside { border-left: 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; }
-  .rules { display: none; }
+  .explainer { grid-template-columns: 1fr; }
+  .explainer article + article { border-left: 0; border-top: 1px solid var(--line); }
 }
 @media (max-width: 480px) { aside { grid-template-columns: 1fr; } .canvas-wrap { min-height: 52vh; } }

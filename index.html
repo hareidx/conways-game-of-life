@@ -11,7 +11,7 @@
     <main>
       <header>
         <div>
-          <p class="eyebrow">CELLULAR AUTOMATA / B3·S23</p>
+          <p class="eyebrow" id="mode-eyebrow">CELLULAR AUTOMATA / B3·S23</p>
           <h1>Life <em>Lab</em></h1>
           <p class="intro">A tiny universe with two rules. Draw a pattern, set time in motion, and watch complexity appear.</p>
         </div>
@@ -31,6 +31,20 @@
           <div class="control-group transport">
             <button id="play" class="primary">▶ <span>Start</span></button>
             <button id="step">Step →</button>
+          </div>
+
+          <div class="control-group">
+            <label for="variation"><span>Universe</span><output id="variation-code">B3/S23</output></label>
+            <select id="variation" aria-label="Choose a cellular automaton">
+              <optgroup label="Life-like rules">
+                <option value="conway">Conway’s Life</option><option value="highlife">HighLife</option>
+                <option value="seeds">Seeds</option><option value="dayNight">Day &amp; Night</option>
+                <option value="maze">Maze</option><option value="replicator">Replicator</option>
+              </optgroup>
+              <optgroup label="Cellular automata cousins">
+                <option value="brian">Brian’s Brain</option><option value="wireworld">Wireworld</option><option value="langton">Langton’s Ant</option>
+              </optgroup>
+            </select>
           </div>
 
           <div class="control-group">
@@ -57,12 +71,11 @@
             <button id="clear">Clear</button>
           </div>
 
-          <div class="rules">
-            <span class="label">The whole universe</span>
-            <p><b>B3</b> A dead cell with exactly 3 neighbours is born.</p>
-            <p><b>S23</b> A live cell with 2 or 3 neighbours survives.</p>
-          </div>
         </aside>
+      </section>
+      <section class="explainer" aria-live="polite">
+        <article><span class="label">Current universe</span><h2 id="rule-name">Conway’s Life</h2><p id="rule-summary"></p><p class="notation" id="rule-notation"></p></article>
+        <article><span class="label">Current specimen</span><h2 id="specimen-name">Glider</h2><p id="specimen-summary"></p><p class="notation" id="state-key"></p></article>
       </section>
     </main>
     <script type="module" src="src/app.js"></script>

@@ -1,12 +1,24 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { keyOf, nextGeneration, patterns, translate } from "../src/life.js";
+import { keyOf, nextGeneration, nextGenerationWithRule, patterns, translate, variations } from "../src/life.js";
 
 const cells = (...coordinates) => new Set(coordinates.map(([r, c]) => keyOf(r, c)));
 
 test("a block is a still life", () => {
   const block = cells([0, 0], [0, 1], [1, 0], [1, 1]);
   assert.deepEqual(nextGeneration(block), block);
+});
+
+test("Seeds births cells with two neighbours and preserves none", () => {
+  const seed = cells([0, 0], [0, 1]);
+  const next = nextGenerationWithRule(seed, variations.seeds.birth, variations.seeds.survival);
+  assert.equal(next.has(keyOf(0, 0)), false);
+  assert.equal(next.has(keyOf(-1, 0)), true);
+});
+
+test("all named variations provide an explanation", () => {
+  assert.equal(Object.keys(variations).length, 9);
+  for (const variation of Object.values(variations)) assert.ok(variation.name && variation.summary && variation.code);
 });
 
 test("a blinker oscillates with period two", () => {

@@ -70,6 +70,8 @@ export const patterns = {
   glider: [[0, 1], [1, 2], [2, 0], [2, 1], [2, 2]],
   blinker: [[0, 0], [0, 1], [0, 2]],
   block: [[0, 0], [0, 1], [1, 0], [1, 1]],
+  beehive: parseRlePattern("b2o$o2bo$b2o!"),
+  loaf: parseRlePattern("b2o$o2bo$bobo$2bo!"),
   toad: [[0, 1], [0, 2], [0, 3], [1, 0], [1, 1], [1, 2]],
   beacon: [[0, 0], [0, 1], [1, 0], [1, 1], [2, 2], [2, 3], [3, 2], [3, 3]],
   rPentomino: [[0, 1], [0, 2], [1, 0], [1, 1], [2, 1]],
@@ -79,6 +81,7 @@ export const patterns = {
   koksGalaxy: parseRlePattern("2bo2bobob$2obob3ob$bo6bo$2o5bob2$bo5b2o$o6bob$b3obob2o$bobo2bo!"),
   pentadecathlon: parseRlePattern("2bo4bo2b$2ob4ob2o$2bo4bo!"),
   queenBeeShuttle: parseRlePattern("9bo$7bobo$6bobo11b2o$2o3bo2bo11b2o$2o4bobo$7bobo$9bo!"),
+  lightweightSpaceship: parseRlePattern("bo2bo$o4b$o3bo$4o!"),
   pulsar: [
     [0, 2], [0, 3], [0, 4], [0, 8], [0, 9], [0, 10],
     [2, 0], [2, 5], [2, 7], [2, 12], [3, 0], [3, 5], [3, 7], [3, 12],
@@ -93,6 +96,8 @@ export const patternInfo = {
   glider: ["Glider", "A five-cell spaceship that walks diagonally across Conway’s universe."],
   blinker: ["Blinker", "The smallest oscillator: a line that flips between horizontal and vertical."],
   block: ["Block", "A still life. Every cell has the perfect number of neighbours, so nothing changes."],
+  beehive: ["Beehive", "A six-cell still life shaped like a tiny ring. It stays unchanged forever unless disturbed."],
+  loaf: ["Loaf", "A lopsided seven-cell still life. Its balanced neighbour counts keep it completely still."],
   toad: ["Toad", "Six cells that rock between two shapes, repeating every second generation."],
   beacon: ["Beacon", "Two small blocks whose inner corners blink on and off together."],
   rPentomino: ["R-pentomino", "Only five cells, yet it stays busy for 1,103 generations in Conway’s Life."],
@@ -102,5 +107,6 @@ export const patternInfo = {
   koksGalaxy: ["Kok’s galaxy", "A 28-cell period-8 oscillator in which every cell changes during the cycle."],
   pentadecathlon: ["Pentadecathlon", "A famous 12-cell oscillator that takes 15 generations to return."],
   queenBeeShuttle: ["Queen bee shuttle", "A moving core travels between two blocks and back again every 30 generations."],
+  lightweightSpaceship: ["Lightweight spaceship", "A nine-cell craft that repeats every four generations while travelling sideways."],
   pulsar: ["Pulsar", "A large, symmetrical oscillator that repeats every three generations."]
 };

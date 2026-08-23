@@ -44,8 +44,23 @@ test("lonely and overcrowded cells die", () => {
 test("the pattern library exposes each preset with the expected population", () => {
   assert.deepEqual(
     Object.fromEntries(Object.entries(patterns).map(([name, pattern]) => [name, pattern.length])),
-    { glider: 5, blinker: 3, block: 4, toad: 6, beacon: 8, rPentomino: 5, acorn: 7, clock: 6, figureEight: 12, koksGalaxy: 28, pentadecathlon: 12, queenBeeShuttle: 20, pulsar: 48 }
+    { glider: 5, blinker: 3, block: 4, beehive: 6, loaf: 7, toad: 6, beacon: 8, rPentomino: 5, acorn: 7, clock: 6, figureEight: 12, koksGalaxy: 28, pentadecathlon: 12, queenBeeShuttle: 20, lightweightSpaceship: 9, pulsar: 48 }
   );
+});
+
+for (const name of ["block", "beehive", "loaf"]) {
+  test(`${name} is a still life`, () => {
+    const start = translate(patterns[name], 0, 0);
+    assert.deepEqual(nextGeneration(start), start);
+  });
+}
+
+test("the lightweight spaceship moves after four generations", () => {
+  const start = translate(patterns.lightweightSpaceship, 0, 0);
+  let state = start;
+  for (let generation = 0; generation < 4; generation += 1) state = nextGeneration(state);
+  assert.notDeepEqual(state, start);
+  assert.equal(state.size, start.size);
 });
 
 test("RLE pattern notation expands live cells", () => {

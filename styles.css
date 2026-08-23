@@ -27,6 +27,8 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 select { width: 100%; border: 1px solid #3b403c; border-radius: 0; background: #111411; color: var(--ink); padding: 11px; font: inherit; font-size: 12px; }
 .patterns { display: grid; gap: 7px; margin-top: 14px; }
 .patterns button { display: flex; justify-content: space-between; text-align: left; }
+.specimen-category { margin: 10px 0 1px; color: #737a74; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.specimen-category:first-child { margin-top: 0; }
 small { color: var(--muted); }
 .utility { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .explainer { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-top: 0; background: #131614; }

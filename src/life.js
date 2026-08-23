@@ -32,15 +32,15 @@ export function nextGeneration(liveCells) {
 }
 
 export const variations = {
-  conway: { name: "Conway’s Life", code: "B3/S23", kind: "life", birth: [3], survival: [2, 3], summary: "The original. Crowds and loneliness kill; just enough company keeps life going." },
-  highlife: { name: "HighLife", code: "B36/S23", kind: "life", birth: [3, 6], survival: [2, 3], summary: "Conway’s rules plus one extra birth condition. That tiny change allows self-copying patterns." },
-  seeds: { name: "Seeds", code: "B2/S", kind: "life", birth: [2], survival: [], summary: "Two neighbours create a cell, but nothing survives. The world sparkles and explodes outward." },
-  dayNight: { name: "Day & Night", code: "B3678/S34678", kind: "life", birth: [3, 6, 7, 8], survival: [3, 4, 6, 7, 8], summary: "Living and empty space follow nearly mirrored rules, forming competing islands and continents." },
-  maze: { name: "Maze", code: "B3/S12345", kind: "life", birth: [3], survival: [1, 2, 3, 4, 5], summary: "Cells survive more easily, so growth settles into winding walls and maze-like corridors." },
-  replicator: { name: "Replicator", code: "B1357/S1357", kind: "life", birth: [1, 3, 5, 7], survival: [1, 3, 5, 7], summary: "Odd numbers rule. Small patterns can repeatedly make larger copies of themselves." },
-  brian: { name: "Brian’s Brain", code: "B2/S/C3", kind: "brian", summary: "Cells fire, become tired for one turn, then rest. Moving waves resemble signals in a brain." },
-  wireworld: { name: "Wireworld", code: "4 states", kind: "wireworld", summary: "Copper cells carry electron heads and tails. Arranged carefully, they become working circuits." },
-  langton: { name: "Langton’s Ant", code: "LR", kind: "langton", summary: "An ant flips each square and turns left or right. After chaos, it builds a repeating highway." }
+  conway: { name: "Conway’s Life", code: "B3/S23", kind: "life", birth: [3], survival: [2, 3], summary: "A dead cell is born with exactly 3 neighbours. A living cell survives with 2 or 3; otherwise it dies from loneliness or crowding." },
+  highlife: { name: "HighLife", code: "B36/S23", kind: "life", birth: [3, 6], survival: [2, 3], summary: "A dead cell is born with exactly 3 or 6 neighbours; living cells still survive with 2 or 3. Adding birth at 6 allows self-copying patterns." },
+  seeds: { name: "Seeds", code: "B2/S", kind: "life", birth: [2], survival: [], summary: "A dead cell is born with exactly 2 neighbours. No living cell survives, so the world sparkles and explodes outward." },
+  dayNight: { name: "Day & Night", code: "B3678/S34678", kind: "life", birth: [3, 6, 7, 8], survival: [3, 4, 6, 7, 8], summary: "A dead cell is born with 3, 6, 7, or 8 neighbours; a living cell survives with 3, 4, 6, 7, or 8. These nearly mirrored rules form competing islands and continents." },
+  maze: { name: "Maze", code: "B3/S12345", kind: "life", birth: [3], survival: [1, 2, 3, 4, 5], summary: "A dead cell is born with exactly 3 neighbours; a living cell survives with 1 through 5. Easy survival leaves winding walls and maze-like corridors." },
+  replicator: { name: "Replicator", code: "B1357/S1357", kind: "life", birth: [1, 3, 5, 7], survival: [1, 3, 5, 7], summary: "Dead and living cells both continue with an odd number—1, 3, 5, or 7—of neighbours. Small patterns can grow into repeated copies." },
+  brian: { name: "Brian’s Brain", code: "B2/S/C3", kind: "brian", summary: "A resting cell fires beside exactly 2 firing neighbours, then every cell cycles firing → recovering → resting. The moving waves resemble signals in a brain." },
+  wireworld: { name: "Wireworld", code: "4 states", kind: "wireworld", summary: "An electron head becomes a tail, a tail becomes copper, and copper becomes a head beside 1 or 2 electron heads. Those moving signals can form working circuits." },
+  langton: { name: "Langton’s Ant", code: "LR", kind: "langton", summary: "On white, the ant turns right and makes the square black; on black, it turns left and makes it white. It flips the colour, moves forward, and eventually builds a repeating highway." }
 };
 
 export function translate(pattern, rowOffset, columnOffset) {
@@ -93,15 +93,15 @@ export const patterns = {
 };
 
 export const patternInfo = {
-  glider: ["Glider", "A five-cell spaceship that walks diagonally across Conway’s universe."],
-  blinker: ["Blinker", "The smallest oscillator: a line that flips between horizontal and vertical."],
-  block: ["Block", "A still life. Every cell has the perfect number of neighbours, so nothing changes."],
-  beehive: ["Beehive", "A six-cell still life shaped like a tiny ring. It stays unchanged forever unless disturbed."],
-  loaf: ["Loaf", "A lopsided seven-cell still life. Its balanced neighbour counts keep it completely still."],
+  glider: ["Glider", "A five-cell spaceship that repeats its shape every 4 generations, one diagonal square farther along. It is the smallest pattern that travels through Conway’s universe."],
+  blinker: ["Blinker", "The smallest oscillator: a three-cell line that flips between horizontal and vertical. It returns after 2 generations."],
+  block: ["Block", "A four-cell still life. Each live cell has exactly 3 neighbours and no nearby empty cell has 3, so nothing changes."],
+  beehive: ["Beehive", "A six-cell still life shaped like a tiny ring. Each cell has 2 neighbours and no empty cell has exactly 3, so it remains balanced."],
+  loaf: ["Loaf", "A lopsided seven-cell still life. Every live cell has 2 or 3 neighbours and no empty cell has exactly 3, so it stays still."],
   toad: ["Toad", "Six cells that rock between two shapes, repeating every second generation."],
-  beacon: ["Beacon", "Two small blocks whose inner corners blink on and off together."],
-  rPentomino: ["R-pentomino", "Only five cells, yet it stays busy for 1,103 generations in Conway’s Life."],
-  acorn: ["Acorn", "Seven cells that grow into a huge, long-lived population before settling down."],
+  beacon: ["Beacon", "Two small blocks whose inner corners blink on and off together. This period-2 oscillator returns after 2 generations."],
+  rPentomino: ["R-pentomino", "This five-cell methuselah stays active for 1,103 generations, then settles into 116 cells, including 6 escaping gliders."],
+  acorn: ["Acorn", "This seven-cell methuselah grows for 5,206 generations before settling into a final population of 633. A tiny seed creates a vast, long-lived world."],
   clock: ["Clock", "A six-cell oscillator whose centre seems to rotate. It repeats every two generations."],
   figureEight: ["Figure eight", "Two tiny three-by-three islands trade places in an eight-generation loop."],
   koksGalaxy: ["Kok’s galaxy", "A 28-cell period-8 oscillator in which every cell changes during the cycle."],

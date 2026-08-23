@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { keyOf, nextGeneration, nextGenerationWithRule, parseRlePattern, patterns, translate, variations } from "../src/life.js";
+import { keyOf, nextGeneration, nextGenerationWithRule, parseRlePattern, patternInfo, patterns, translate, variations } from "../src/life.js";
 
 const cells = (...coordinates) => new Set(coordinates.map(([r, c]) => keyOf(r, c)));
 
@@ -19,6 +19,31 @@ test("Seeds births cells with two neighbours and preserves none", () => {
 test("all named variations provide an explanation", () => {
   assert.equal(Object.keys(variations).length, 9);
   for (const variation of Object.values(variations)) assert.ok(variation.name && variation.summary && variation.code);
+});
+
+test("all specimens provide a name and explanation", () => {
+  assert.deepEqual(Object.keys(patternInfo).sort(), Object.keys(patterns).sort());
+  for (const [name, summary] of Object.values(patternInfo)) assert.ok(name && summary);
+});
+
+test("Life-like explanations expose their exact neighbour counts", () => {
+  const expectedDetails = {
+    conway: ["exactly 3", "2 or 3"],
+    highlife: ["3 or 6", "2 or 3"],
+    seeds: ["exactly 2", "No living cell survives"],
+    dayNight: ["3, 6, 7, or 8", "3, 4, 6, 7, or 8"],
+    maze: ["exactly 3", "1 through 5"],
+    replicator: ["1, 3, 5, or 7"]
+  };
+  for (const [key, details] of Object.entries(expectedDetails)) {
+    for (const detail of details) assert.match(variations[key].summary, new RegExp(detail));
+  }
+});
+
+test("multi-state explanations describe every transition", () => {
+  for (const detail of ["exactly 2 firing neighbours", "firing → recovering → resting"]) assert.ok(variations.brian.summary.includes(detail));
+  for (const detail of ["head becomes a tail", "tail becomes copper", "1 or 2 electron heads"]) assert.ok(variations.wireworld.summary.includes(detail));
+  for (const detail of ["white", "right", "black", "left", "flips the colour", "moves forward"]) assert.ok(variations.langton.summary.includes(detail));
 });
 
 test("a blinker oscillates with period two", () => {

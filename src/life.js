@@ -47,6 +47,25 @@ export function translate(pattern, rowOffset, columnOffset) {
   return new Set(pattern.map(([row, column]) => keyOf(row + rowOffset, column + columnOffset)));
 }
 
+export function parseRlePattern(rle) {
+  const pattern = [];
+  let row = 0;
+  let column = 0;
+  let count = "";
+  for (const symbol of rle.replace(/\s/g, "")) {
+    if (/\d/.test(symbol)) { count += symbol; continue; }
+    const amount = Number(count || 1);
+    count = "";
+    if (symbol === "o") {
+      for (let index = 0; index < amount; index += 1) pattern.push([row, column + index]);
+      column += amount;
+    } else if (symbol === "b") column += amount;
+    else if (symbol === "$") { row += amount; column = 0; }
+    else if (symbol === "!") break;
+  }
+  return pattern;
+}
+
 export const patterns = {
   glider: [[0, 1], [1, 2], [2, 0], [2, 1], [2, 2]],
   blinker: [[0, 0], [0, 1], [0, 2]],
@@ -55,6 +74,11 @@ export const patterns = {
   beacon: [[0, 0], [0, 1], [1, 0], [1, 1], [2, 2], [2, 3], [3, 2], [3, 3]],
   rPentomino: [[0, 1], [0, 2], [1, 0], [1, 1], [2, 1]],
   acorn: [[0, 1], [1, 3], [2, 0], [2, 1], [2, 4], [2, 5], [2, 6]],
+  clock: parseRlePattern("2bo$obo$bobo$bo!"),
+  figureEight: parseRlePattern("2o$2obo$4bo$bo$2bob2o$4b2o!"),
+  koksGalaxy: parseRlePattern("2bo2bobob$2obob3ob$bo6bo$2o5bob2$bo5b2o$o6bob$b3obob2o$bobo2bo!"),
+  pentadecathlon: parseRlePattern("2bo4bo2b$2ob4ob2o$2bo4bo!"),
+  queenBeeShuttle: parseRlePattern("9bo$7bobo$6bobo11b2o$2o3bo2bo11b2o$2o4bobo$7bobo$9bo!"),
   pulsar: [
     [0, 2], [0, 3], [0, 4], [0, 8], [0, 9], [0, 10],
     [2, 0], [2, 5], [2, 7], [2, 12], [3, 0], [3, 5], [3, 7], [3, 12],
@@ -73,5 +97,10 @@ export const patternInfo = {
   beacon: ["Beacon", "Two small blocks whose inner corners blink on and off together."],
   rPentomino: ["R-pentomino", "Only five cells, yet it stays busy for 1,103 generations in Conway’s Life."],
   acorn: ["Acorn", "Seven cells that grow into a huge, long-lived population before settling down."],
+  clock: ["Clock", "A six-cell oscillator whose centre seems to rotate. It repeats every two generations."],
+  figureEight: ["Figure eight", "Two tiny three-by-three islands trade places in an eight-generation loop."],
+  koksGalaxy: ["Kok’s galaxy", "A 28-cell period-8 oscillator in which every cell changes during the cycle."],
+  pentadecathlon: ["Pentadecathlon", "A famous 12-cell oscillator that takes 15 generations to return."],
+  queenBeeShuttle: ["Queen bee shuttle", "A moving core travels between two blocks and back again every 30 generations."],
   pulsar: ["Pulsar", "A large, symmetrical oscillator that repeats every three generations."]
 };

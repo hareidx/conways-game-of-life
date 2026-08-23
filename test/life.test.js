@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { keyOf, nextGeneration, nextGenerationWithRule, patterns, translate, variations } from "../src/life.js";
+import { keyOf, nextGeneration, nextGenerationWithRule, parseRlePattern, patterns, translate, variations } from "../src/life.js";
 
 const cells = (...coordinates) => new Set(coordinates.map(([r, c]) => keyOf(r, c)));
 
@@ -44,6 +44,19 @@ test("lonely and overcrowded cells die", () => {
 test("the pattern library exposes each preset with the expected population", () => {
   assert.deepEqual(
     Object.fromEntries(Object.entries(patterns).map(([name, pattern]) => [name, pattern.length])),
-    { glider: 5, blinker: 3, block: 4, toad: 6, beacon: 8, rPentomino: 5, acorn: 7, pulsar: 48 }
+    { glider: 5, blinker: 3, block: 4, toad: 6, beacon: 8, rPentomino: 5, acorn: 7, clock: 6, figureEight: 12, koksGalaxy: 28, pentadecathlon: 12, queenBeeShuttle: 20, pulsar: 48 }
   );
 });
+
+test("RLE pattern notation expands live cells", () => {
+  assert.deepEqual(parseRlePattern("2o$bo!"), [[0, 0], [0, 1], [1, 1]]);
+});
+
+for (const [name, period] of Object.entries({ clock: 2, figureEight: 8, koksGalaxy: 8, pentadecathlon: 15, queenBeeShuttle: 30 })) {
+  test(`${name} returns to its starting phase after ${period} generations`, () => {
+    const start = translate(patterns[name], 0, 0);
+    let state = start;
+    for (let generation = 0; generation < period; generation += 1) state = nextGeneration(state);
+    assert.deepEqual(state, start);
+  });
+}

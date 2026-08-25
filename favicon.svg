@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Life Lab favicon">
+  <defs>
+    <linearGradient id="background" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#16213e" />
+      <stop offset="0.55" stop-color="#0f3460" />
+      <stop offset="1" stop-color="#533483" />
+    </linearGradient>
+    <linearGradient id="cell" x1="16" y1="14" x2="48" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7df9ff" />
+      <stop offset="1" stop-color="#7cff6b" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#background)" />
+  <path d="M16 14.5h32M16 25.5h32M16 36.5h32M16 47.5h32M16.5 14v34M27.5 14v34M38.5 14v34M49.5 14v34" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1" />
+  <g filter="url(#glow)">
+    <rect x="38" y="16" width="9" height="9" rx="2" fill="url(#cell)" />
+    <rect x="16" y="27" width="9" height="9" rx="2" fill="url(#cell)" />
+    <rect x="38" y="27" width="9" height="9" rx="2" fill="url(#cell)" />
+    <rect x="27" y="38" width="9" height="9" rx="2" fill="url(#cell)" />
+    <rect x="38" y="38" width="9" height="9" rx="2" fill="url(#cell)" />
+  </g>
+  <path d="M19 53c8 4.5 22 4.5 30-1" fill="none" stroke="#7df9ff" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round" />
+</svg>
